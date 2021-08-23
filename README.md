@@ -2,7 +2,7 @@
 An implementation of Conway's Game of Life, where the user can choose to pause the simulation and dynamically add or remove cells.
 
 # Contents
-GameofLife.py - Main executable
+GameofLife.py - Main executable \n
 README
 
 # Dependencies
