@@ -84,7 +84,7 @@ if __name__ == "__main__":
 			current_state = update()		
 		
 		pygame.display.update()
-		clock.tick(20) 
+		clock.tick(20)
 
 pygame.quit()
 quit()
