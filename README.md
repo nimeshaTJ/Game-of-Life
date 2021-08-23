@@ -10,4 +10,4 @@ NumPy
 Pygame
 
 # Version History
-23/Aug/2021 - First iteration of Game of Life. Supports user interaction (pausing, resuming, placing/removing cells, toggling gridlines), however simulation breaks at edges of screen
+23/Aug/2021 - First iteration of Game of Life. Supports user interaction (pausing, resuming, placing/removing cells, toggling gridlines), however simulation breaks at the edges.
