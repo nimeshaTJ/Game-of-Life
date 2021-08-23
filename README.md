@@ -3,7 +3,7 @@ An implementation of Conway's Game of Life, where the user can choose to pause t
 
 
 # Contents
-GameofLife.py - Main executable
+GameofLife.py - Source code
 
 README
 
