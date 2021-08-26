@@ -47,6 +47,7 @@ display_height = 720
 display_width = 1000
 cell_size = 10
 gridlines = False
+frame_rate = 120
 
 #Defining colours
 white = (255,255,255)
@@ -73,16 +74,17 @@ if __name__ == "__main__":
 			if event.type == pygame.QUIT:
 				crashed = True
 
-			#Allows user to place or remove cells using the mouse
-			if event.type == pygame.MOUSEBUTTONDOWN:
-				pos = pygame.mouse.get_pos()
-				coords = [int(pos[1]/cell_size)+1, int(pos[0]/cell_size)+1]
-				if event.button == 1:
-					current_state[coords[0], coords[1]] = 1
-				if event.button == 3:
-					current_state[coords[0], coords[1]] = 0
+			pos = pygame.mouse.get_pos()
+			coords = [int(pos[1]/cell_size)+1, int(pos[0]/cell_size)+1]
+			pressed = pygame.mouse.get_pressed()
 
-			#Allows user to toggle gridlines, pause, and resume		
+			#Allows user to place or remove cells by holding down the mouse
+			if pressed[0] == True:
+				current_state[coords[0], coords[1]] = 1
+			if pressed[2] == True:
+				current_state[coords[0], coords[1]] = 0
+
+			#Allows user to toggle gridlines, pause, resume, and clear the screen		
 			if event.type == pygame.KEYDOWN:
 				if event.key == pygame.K_g:
 					gridlines = not gridlines
@@ -90,13 +92,16 @@ if __name__ == "__main__":
 					paused = False	
 				if event.key == pygame.K_ESCAPE:
 					paused = True		
-		
+				if event.key == pygame.K_c:
+					current_state[:,:] = 0
+				if event.key == pygame.K_f:
+					current_state[:,:] = 1
 		draw_grid()
 		if paused == False:
 			current_state = update()		
 		
 		pygame.display.update()
-		clock.tick(20)
+		clock.tick(frame_rate)
 
 pygame.quit()
 quit()
