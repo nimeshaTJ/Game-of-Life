@@ -5,7 +5,7 @@ import sys
 
 #Function that fills in patterns on the board given a list of coordinates and an origin point
 def fill_cells(origin,size,points):
-	subgrid = innitial_state[origin[0]:origin[0]+size[0],origin[1]:origin[1]+size[1]]
+	subgrid = initial_state[origin[0]:origin[0]+size[0],origin[1]:origin[1]+size[1]]
 	for point in points:
 		subgrid[point[0],point[1]] = 1
 
