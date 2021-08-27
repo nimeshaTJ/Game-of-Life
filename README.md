@@ -3,6 +3,16 @@ An implementation of Conway's Game of Life, where the user can choose to pause t
 
 
 # Instructions
+
+## Setup
+Clone project and install requirements:
+```console
+$ git clone https://github.com/nimeshaTJ/Game-of-Life.git
+$ cd Game-of-Life
+$ pip install -r requirements.txt
+```
+
+## Usage
 To place a preset pattern on the board on startup, type 
 
 pattern_name@x,y
@@ -26,12 +36,6 @@ leftclick - add a live cell
 rightclick - remove a live cell
 
 drag the mouse to add/remove multiple cells 
-
-
-# Dependencies
-NumPy
-
-Pygame
 
 
 # Version History
