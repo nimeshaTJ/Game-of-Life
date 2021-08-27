@@ -15,9 +15,9 @@ $ pip install -r requirements.txt
 ## Usage
 To place a preset pattern on the board on startup, type 
 
-pattern_name@x,y
+pattern_name@row,col
 
-as an argument in the cmd command, where x and y are the coordinates where you want the pattern to be placed. Preset patterns are stored in patterns.py, and to add new patterns simply update the dictionary with the name, dimensions of the pattern, and the points relative to its boundary box. 
+as an argument in the cmd command, where row and col are the coordinates where you want the pattern's origin to be placed (origin is at top right of pattern bounding box). Preset patterns are stored in patterns.py, and to add new patterns simply update the dictionary with the name, dimensions of the pattern, and its RLE (Run Length Encoded) format. 
 
 You can interact with the simulation with:
 
@@ -42,3 +42,5 @@ drag the mouse to add/remove multiple cells
 23/Aug/2021 - First iteration of Game of Life. Supports user interaction (pausing, resuming, placing/removing cells, toggling gridlines), however simulation breaks at the edges.
 
 27/Aug/2021 - Added ability to clear screen with "c", fill screen with "f", and click+drag the mouse to add/remove multiple cells fluidly. Also updated so that the grid lies on a toroid and wraps around edges. Added ability to place a preset pattern onto the board from the command line. Presets are stored in patterns.py.
+
+28/Aug/2021 - patterns.py now stores patterns in their RLE format, which GameofLife.py decodes into point coordinates and places on the board.
