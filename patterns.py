@@ -50,5 +50,49 @@ patterns = {
 	"pre_pulsar": {
 		"size": [3,9],
 		"RLE": '3o3b3o$obo3bobo$3o3b3o!'
+	},
+	"Canada_goose": {
+		"size": [12,13],
+		"RLE": '3o10b$o9b2ob$bo6b3obo$3b2o2b2o4b$4bo8b$8bo4b$4b2o3bo3b$3bobob2o4b$3bobo2bob2ob$2bo4b2o4b$2b2o9b$2b2o!'
+	},
+	"Schick_engine": {
+		"size": [11,20],
+		"RLE": 'bo2bo15b$o19b$o3bo15b$4o9b2o5b$6b3o5b2o4b$6b2ob2o6b3o$6b3o5b2o4b$4o9b2o5b$o3bo15b$o19b$bo2bo!'
+	},
+	"sidecar": {
+		"size": [10,8],
+		"RLE": 'bo6b$o5bob$o5bob$5obob2$4b2o2b$2bo4bo$bo6b$bo5bo$b6o!'
+	},
+	"fly": {
+		"size": [20,34],
+		"RLE": '2bo31b$bobo30b$bobo22bobo3bob$bo23b2obobo2bo$11b3o8bo9bob$2o9b2o2bob2o3bo2b4o5b$bobo9b4o2bobo2b2o4b2o2b$b2o8bo2bo3b3o5b3o5b$2bo7bo4bo2b2o2b2o2bo2bo4b$3bo2bo3bo4bo2b3obobo4b2o3b$7bob2o4bo2b4o5bo6b$4b2o3b2o4bo2b4o5bo6b$4bobo3bo4bo2b3obobo4b2o3b$3b2o5bo4bo2b2o2b2o2bo2bo4b$4bobo4bo2bo3b3o5b3o5b$5bo7b4o2bobo2b2o4b2o2b$11b2o2bob2o3bo2b4o5b$11b3o8bo9bob$25b2obobo2bo$26bobo3bo!'
+	},
+	"Herschel": {
+		"size": [4,3],
+		"RLE": 'o2b$3o$obo$2bo!'
+	},
+	"edge_repair_1": {
+		"size": [7,16],
+		"RLE": '8bo7b$7b4o5b$2bo3bo3b2ob2ob$b4o5bo2b2ob$o3bo7bo2bo$bobo2bo9b$5bo!'
+	},
+	"phi_sparks_with_gliders": {
+		"size": [18,45],
+		"RLE": '16b3o$15bo3bo$15bo3bo$16b3o3$2bo11b2o7bo20bo$2o10bo4bo3b2o12b2o5b2o$b2o9bo4bo4b2o9bo4bo4b2o$12bo4bo15bo4bo$14b2o17bo4bo$35b2o2$b3o$o3bo32b3o$o3bo31bo3bo$b3o32bo3bo$37b3o!'
+	},
+	"crab": {
+		"size": [12,13],
+		"RLE": '8b2o3b$7b2o4b$9bo3b$11b2o$10bo2b2$9bo2bo$b2o5b2o3b$2o5bo5b$2bo4bobo3b$4b2o2bo4b$4b2o!'
+	},
+	"orion": {
+		"size": [15,14],
+		"RLE": '3b2o9b$3bobo8b$3bo10b$2obo10b$o4bo8b$ob2o6b3ob$5b3o4b2o$6b3obobob$13bo$6bobo5b$5b2obo5b$6bo7b$4b2obo6b$7bo6b$5b2o!'
+	},
+	"orion_2": {
+		"size": [13,13],
+		"RLE": 'b2o10b$2o11b$2bo10b$4bo4b3ob$4b3o4b2o$5b3obobob$12bo$5bobo5b$4b2obo5b$5bo7b$3b2obo6b$6bo6b$4b2o!'
+	},
+	"bulldozer": {
+		"size": [32,16],
+		"RLE": '4bo6bo4b$3bobob2obobo3b$3b2o2b2o2b2o3b$7b2o7b2$5b2o2b2o5b$5b2o2b2o5b$6b4o6b$6bo2bo6b$5bo4bo5b$5bo4bo5b$5bob2obo5b$6bo2bo6b$6bo2bo6b2$o14bo$2o4bo2bo4b2o$o5b4o5bo$b2o4b2o4b2ob$2bo10bo2b$obo10bobo$b5o4b5ob$3bo2b4o2bo3b$2bo4b2o4bo2b$6bo2bo6b$7b2o7b$4b2ob2ob2o4b2$3bo8bo3b$2b3o6b3o2b$2bo2bo4bo2bo2b$b2o10b2o!'
 	}
 }
