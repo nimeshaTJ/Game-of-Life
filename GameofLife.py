@@ -5,7 +5,7 @@ import sys
 
 #Function that fills in patterns on the board given a list of coordinates and an origin point
 def fill_cells(origin,size,points):
-	subgrid = current_state[origin[0]:origin[0]+size[0],origin[1]:origin[1]+size[1]]
+	subgrid = innitial_state[origin[0]:origin[0]+size[0],origin[1]:origin[1]+size[1]]
 	for point in points:
 		subgrid[point[0],point[1]] = 1
 
@@ -60,13 +60,17 @@ grey = (50,50,50)
 
 #Initializing the array of cells
 initial_state = np.zeros((num_rows,num_cols))
-#Copy of initial state from which values will be read 
-current_state = initial_state
 
+#Adding user-specified patterns 
 for arg in sys.argv[1:]:
 	origin = tuple(map(int,arg.split("@")[1].split(",")))
 	pattern = arg.split("@")[0]
 	fill_cells((origin),patterns.patterns[pattern]["size"], patterns.patterns[pattern]["points"])
+
+#Copy of initial state from which values will be read 
+current_state = initial_state
+
+
 
 gameDisplay = pygame.display.set_mode((display_width,display_height))
 pygame.display.set_caption("Game of Life")
