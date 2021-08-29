@@ -1,11 +1,37 @@
-#Function that fills in patterns on the board given a list of coordinates and an origin point
-def fill_cells(grid,origin,size,points):
-	subgrid = grid[origin[0]:origin[0]+size[0],origin[1]:origin[1]+size[1]]
-	for point in points:
-		subgrid[point[0],point[1]] = 1
+import numpy as np
 
-#Function that decodes RLE format into coordinate points
-def decode(rle):
+#Function that fills in patterns on the board given an origin point and a list of coordinates or an array 
+def fill_cells(grid,origin,size,points):
+		if type(points) == list:
+			subgrid = grid[origin[0]:origin[0]+size[0],origin[1]:origin[1]+size[1]]
+			for point in points:
+				subgrid[point[0],point[1]] = 1
+		else:
+			grid[origin[0]:origin[0]+size[0],origin[1]:origin[1]+size[1]] = points
+
+#Function that flips a given pattern vertically pr horizontally
+def flip(array,axis):
+	flipped = array.copy()
+	num_rows = len(array)
+	num_cols = len(array[0])
+	for rowindex, row in enumerate(array):
+		for colindex, value in enumerate(row):
+			if axis == 'v':
+				flipped[(num_rows-1)-rowindex,colindex] = value
+			else:
+				flipped[rowindex,(num_cols-1)-colindex] = value
+	return flipped
+
+#Function that rotates a given pattern 90° clockwise 'rotations' times
+def rotate(array,rotations):
+	rotated = array.copy()
+	for n in range(rotations):
+		rotated = rotated.transpose()
+		rotated = flip(rotated,'h')
+	return rotated
+
+#Function that decodes RLE format into an array of cells
+def decode(rle,size):
 	expanded = ''
 	multiple = ''
 
@@ -20,14 +46,14 @@ def decode(rle):
 			multiple = ''
 
 	lines = expanded.split("$")
-	points = []
+	array = np.zeros((size[0],size[1]))
 
 	for rowindex,line in enumerate(lines):
 		for colindex,value in enumerate(line):
 			if value == 'o':
-				points.append((rowindex,colindex))
+				array[rowindex,colindex] = 1
 			elif value == '!':
-				return points
+				return array
 
 #Function that calculates and returns the state of all cells at the next timestep
 def update(current_state):

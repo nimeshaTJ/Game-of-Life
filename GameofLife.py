@@ -37,10 +37,18 @@ initial_state = np.zeros((num_rows,num_cols))
 
 #Adding user-specified patterns 
 for arg in sys.argv[1:]:
-	origin = tuple(map(int,arg.split("@")[1].split(",")))
-	pattern = arg.split("@")[0]
-	points = decode(patterns.patterns[pattern]["RLE"])
-	fill_cells(initial_state,(origin),patterns.patterns[pattern]["size"], points )
+	params = arg.split("/")
+	array = None
+	pattern = params[0]
+	array = decode(patterns.patterns[pattern]["RLE"], patterns.patterns[pattern]["size"])
+	origin = tuple(map(int,params[1].split(",")))
+	for param in params[2:]:
+		if param.isalpha():
+			array = flip(array,param)
+		else:
+			array = rotate(array,int(param))
+	size = [len(array),len(array[0])]
+	fill_cells(initial_state, (origin), size, array)
 
 #Copy of initial state from which values will be read 
 current_state = initial_state
