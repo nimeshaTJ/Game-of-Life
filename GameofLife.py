@@ -1,8 +1,8 @@
 import numpy as np
 import pygame
-import patterns
-from GoLfuncs import *
+import json
 import sys
+from GoLfuncs import *
 
 #Function to draw the current state of all cells (white for living cells, black for dead cells)
 def draw_grid():
@@ -40,15 +40,16 @@ for arg in sys.argv[1:]:
 	params = arg.split("/")
 	array = None
 	pattern = params[0]
-	array = decode(patterns.patterns[pattern]["RLE"], patterns.patterns[pattern]["size"])
+	with open('patterns.json','r') as file:
+		patterns = json.load(file)
+		array = decode(patterns[pattern]["RLE"], patterns[pattern]["size"])
 	origin = tuple(map(int,params[1].split(",")))
 	for param in params[2:]:
 		if param.isalpha():
 			array = flip(array,param)
 		else:
 			array = rotate(array,int(param))
-	size = [len(array),len(array[0])]
-	fill_cells(initial_state, (origin), size, array)
+	fill_cells(initial_state, (origin), array)
 
 #Copy of initial state from which values will be read 
 current_state = initial_state
@@ -90,6 +91,15 @@ if __name__ == "__main__":
 					current_state[:,:] = 0
 				if event.key == pygame.K_f:
 					current_state[:,:] = 1
+				if event.key == pygame.K_s:
+					encoded = encode(current_state)
+					name = input('Save pattern as: ')
+					while name in patterns:	
+						print('That name is already assigned to a pattern.')
+						name = input('Please enter another name: ')
+					patterns[name] = {'size': encoded[1], 'RLE': encoded[0]}
+					with open('patterns.json','w') as file:
+						json.dump(patterns,file, indent=4)
 		draw_grid()
 		if paused == False:
 			current_state = update(current_state)		

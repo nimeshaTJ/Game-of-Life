@@ -1,12 +1,13 @@
 import numpy as np
 
 #Function that fills in patterns on the board given an origin point and a list of coordinates or an array 
-def fill_cells(grid,origin,size,points):
+def fill_cells(grid,origin,points):
 		if type(points) == list:
-			subgrid = grid[origin[0]:origin[0]+size[0],origin[1]:origin[1]+size[1]]
+			subgrid = grid[origin[0]:,origin[1]:]
 			for point in points:
 				subgrid[point[0],point[1]] = 1
 		else:
+			size = [len(points), len(points[0])]
 			grid[origin[0]:origin[0]+size[0],origin[1]:origin[1]+size[1]] = points
 
 #Function that flips a given pattern vertically pr horizontally
@@ -54,6 +55,68 @@ def decode(rle,size):
 				array[rowindex,colindex] = 1
 			elif value == '!':
 				return array
+
+#Function that encodes an array of cells into RLE format
+def encode(array):
+
+	leftcols2strip = len(array[0])
+	for row in array:
+		leading0s = 0
+		index = 0
+		while row[index]==0:
+			leading0s+=1
+			if index<len(row)-1:
+				index+=1
+			else:
+				break
+			
+		if leading0s<leftcols2strip:
+			leftcols2strip = leading0s
+
+	leftstrip = array[:,leftcols2strip:]
+	rle = ''
+	for rowindex,row in enumerate(leftstrip):
+		for colindex,value in enumerate(row):
+			if value == 0:				
+				rle += 'b'
+			else:
+				rle += 'o'
+		if rowindex < len(leftstrip)-1:	
+			rle += '$'
+	
+	split = rle.split('$')
+	for rowindex,row in enumerate(split):
+		split[rowindex] = row.rstrip('b')
+
+	rle = '$'.join(split).strip('$')
+	split = rle.split('$')
+	final = ''
+	multiple = 1
+	for index,value in enumerate(rle[1:]):
+		if rle[index] == value:
+			multiple += 1
+			if index == len(rle)-2:
+				final+=(str(multiple)+value)
+		else:
+			if multiple>1:
+				final+=(str(multiple)+rle[index])
+			else:
+				final+=rle[index]
+			if index == len(rle)-2:
+				final+=value
+			multiple = 1
+
+	num_rows = len(split)
+	num_cols = 0
+	for row in split:
+		count = 0
+		for value in row:
+			count+=1
+		if num_cols<count:
+			num_cols = count
+	final+='!'
+	size = [num_rows,num_cols]
+	return final, size 		
 
 #Function that calculates and returns the state of all cells at the next timestep
 def update(current_state):

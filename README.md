@@ -21,6 +21,12 @@ as an argument in the cmd command, where row and col are the coordinates where y
 
 You can interact with the simulation with:
 
+leftclick - add a live cell
+
+rightclick - remove a live cell
+
+drag the mouse to add/remove multiple cells
+
 'Esc' - pause simulation
 
 'Return' - resume simulation
@@ -31,11 +37,7 @@ You can interact with the simulation with:
 
 'f' - fill the screen with live cells
 
-leftclick - add a live cell
-
-rightclick - remove a live cell
-
-drag the mouse to add/remove multiple cells 
+'s' - save the current boardstate (enter desired name in terminal)
 
 
 # Version History
@@ -46,3 +48,5 @@ drag the mouse to add/remove multiple cells
 28/Aug/2021 - patterns.py now stores patterns in their RLE format, which GameofLife.py decodes into point coordinates and places on the board.
 
 29/Aug/2021 - Added ability to rotate and flip patterns before placing on the grid.
+
+01/Sep/2021 - Changed patterns.py to patterns.json; added ability to save the current boardstate to patterns.json
