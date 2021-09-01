@@ -53,5 +53,5 @@ drag the mouse to add/remove multiple cells
 
 01/Sep/2021 - Changed patterns.py to patterns.json; added ability to save the current boardstate to patterns.json
 
-01/Sep/2021 - Can add patterns to board with 'a'
+01/Sep/2021 - Can add patterns to board with 'a'; custom error messages
 

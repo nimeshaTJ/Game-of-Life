@@ -5,6 +5,12 @@ def place_pattern(params, patterns, grid):
 	param_list = params.split("/")
 	array = None
 	pattern = param_list[0]
+	if pattern not in patterns:
+		print("\nNo such pattern saved.\n")
+		return None
+	if len(param_list)<2:
+		print("Invalid format. Please try again.")
+		return None
 	array = decode(patterns[pattern]["RLE"], patterns[pattern]["size"])
 	origin = tuple(map(int,param_list[1].split(",")))
 	for param in param_list[2:]:
@@ -16,13 +22,17 @@ def place_pattern(params, patterns, grid):
 
 #Function that fills in patterns on the board given an origin point and a list of coordinates or an array 
 def fill_cells(grid,origin,points):
+	try:
 		if type(points) == list:
-			subgrid = grid[origin[0]:,origin[1]:]
+			subgrid = grid[origin[0]:,origin[1]:].copy()
 			for point in points:
 				subgrid[point[0],point[1]] = 1
+			grid[origin[0]:,origin[1]:] = subgrid.copy()
 		else:
 			size = [len(points), len(points[0])]
 			grid[origin[0]:origin[0]+size[0],origin[1]:origin[1]+size[1]] = points
+	except (ValueError,IndexError) as error:
+		print("\nCannot fit pattern on board. Try a different pattern or origin.\n")
 
 #Function that flips a given pattern vertically pr horizontally
 def flip(array,axis):
