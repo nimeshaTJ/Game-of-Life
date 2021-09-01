@@ -39,6 +39,8 @@ drag the mouse to add/remove multiple cells
 
 's' - save the current boardstate (enter desired name in terminal)
 
+'a' - add a saved pattern onto the board (using above format)
+
 
 # Version History
 23/Aug/2021 - First iteration of Game of Life. Supports user interaction (pausing, resuming, placing/removing cells, toggling gridlines), however simulation breaks at the edges.
@@ -50,3 +52,6 @@ drag the mouse to add/remove multiple cells
 29/Aug/2021 - Added ability to rotate and flip patterns before placing on the grid.
 
 01/Sep/2021 - Changed patterns.py to patterns.json; added ability to save the current boardstate to patterns.json
+
+01/Sep/2021 - Can add patterns to board with 'a'
+

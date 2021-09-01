@@ -1,5 +1,19 @@
 import numpy as np
 
+#Function that adds a pattern to the board given a pattern name, origin and transformations
+def place_pattern(params, patterns, grid):
+	param_list = params.split("/")
+	array = None
+	pattern = param_list[0]
+	array = decode(patterns[pattern]["RLE"], patterns[pattern]["size"])
+	origin = tuple(map(int,param_list[1].split(",")))
+	for param in param_list[2:]:
+		if param.isalpha():
+			array = flip(array,param)
+		else:
+			array = rotate(array,int(param))
+	fill_cells(grid, origin, array)
+
 #Function that fills in patterns on the board given an origin point and a list of coordinates or an array 
 def fill_cells(grid,origin,points):
 		if type(points) == list:

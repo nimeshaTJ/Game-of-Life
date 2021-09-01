@@ -16,9 +16,26 @@ def draw_grid():
 			if gridlines==True:
 				pygame.draw.rect(gameDisplay,grey,[colindex*cell_size,rowindex*cell_size,cell_size,cell_size], 1)
 
+message = """
+=== Game of Life ===\n\n\n
+You can interact with the simulation with:\n\n\n
+leftclick - add a live cell\n
+rightclick - remove a live cell\n
+drag the mouse to add/remove multiple cells\n
+'Esc' - pause simulation\n
+'Return' - resume simulation\n
+'g' - toggle gridlines\n
+'c' - clear all live cells\n
+'f' - fill the screen with live cells\n
+'s' - save the current boardstate\n
+'a' - add a saved pattern onto the board\n
+
+""" 
+print(message)
+
 pygame.init()
 
-#Parameters for the simulation 
+#Parameters for the simulation and pattern database
 display_height = 720
 display_width = 1000
 cell_size = 10
@@ -26,6 +43,8 @@ num_rows = display_height//cell_size
 num_cols = display_width//cell_size
 gridlines = False
 frame_rate = 120
+with open('patterns.json','r') as file:
+		patterns = json.load(file)
 
 #Defining colours
 white = (255,255,255)
@@ -37,19 +56,7 @@ initial_state = np.zeros((num_rows,num_cols))
 
 #Adding user-specified patterns 
 for arg in sys.argv[1:]:
-	params = arg.split("/")
-	array = None
-	pattern = params[0]
-	with open('patterns.json','r') as file:
-		patterns = json.load(file)
-		array = decode(patterns[pattern]["RLE"], patterns[pattern]["size"])
-	origin = tuple(map(int,params[1].split(",")))
-	for param in params[2:]:
-		if param.isalpha():
-			array = flip(array,param)
-		else:
-			array = rotate(array,int(param))
-	fill_cells(initial_state, (origin), array)
+	place_pattern(arg, patterns, initial_state)
 
 #Copy of initial state from which values will be read 
 current_state = initial_state
@@ -100,6 +107,9 @@ if __name__ == "__main__":
 					patterns[name] = {'size': encoded[1], 'RLE': encoded[0]}
 					with open('patterns.json','w') as file:
 						json.dump(patterns,file, indent=4)
+				if event.key == pygame.K_a:
+					params = input("Enter pattern name, origin, and any transformations: ")
+					place_pattern(params, patterns, current_state)
 		draw_grid()
 		if paused == False:
 			current_state = update(current_state)		
@@ -107,5 +117,6 @@ if __name__ == "__main__":
 		pygame.display.update()
 		clock.tick(frame_rate)
 
+print("\n\nGoodbye!\n\n")
 pygame.quit()
 quit()
